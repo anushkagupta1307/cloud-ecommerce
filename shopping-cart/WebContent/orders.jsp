@@ -3,10 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Orders</title>
+<%@include file="includes/head.jsp" %>
 </head>
 <body>
-
+<%@include file="includes/navbar.jsp" %>
+<%@include file="includes/footer.jsp" %>
 </body>
 </html>
