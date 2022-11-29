@@ -76,7 +76,53 @@ public class ProductDao {
         }
         return book;
     }
+    public Product getSingleProduct(int id) {
+		 Product row = null;
+	        try {
+	            query = "select * from products where id=? ";
+
+	            pst = this.con.prepareStatement(query);
+	            pst.setInt(1, id);
+	            ResultSet rs = pst.executeQuery();
+
+	            while (rs.next()) {
+	            	row = new Product();
+	                row.setId(rs.getInt("id"));
+	                row.setName(rs.getString("name"));
+	                row.setCategory(rs.getString("category"));
+	                row.setPrice(rs.getDouble("price"));
+	                row.setImage(rs.getString("image"));
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            System.out.println(e.getMessage());
+	        }
+
+	        return row;
+	    }
 	
 	
+    public double getTotalCartPrice(ArrayList<Cart> cartList) {
+        double sum = 0;
+        try {
+            if (cartList.size() > 0) {
+                for (Cart item : cartList) {
+                    query = "select price from products where id=?";
+                    pst = this.con.prepareStatement(query);
+                    pst.setInt(1, item.getId());
+                    rs = pst.executeQuery();
+                    while (rs.next()) {
+                        sum+=rs.getDouble("price")*item.getQuantity();
+                    }
+
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return sum;
+    }
 
 }

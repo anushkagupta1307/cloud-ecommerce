@@ -20,8 +20,10 @@ List<Cart> cartProduct = null;
 if (cart_list != null) {
 	ProductDao pDao = new ProductDao(DBConnection.getConnection());
 	cartProduct = pDao.getCartProducts(cart_list);
-	
+	double total= pDao.getTotalCartPrice(cart_list);
 	request.setAttribute("cart_list", cart_list);
+	request.setAttribute("total",total);
+	 
 }
 %>
 <!DOCTYPE html>
@@ -43,7 +45,7 @@ font-size: 25px;
 	<%@include file="/includes/navbar.jsp"%>
 
 	<div class="container my-3">
-		<div class="d-flex py-3"><h3>Total Price: $ ${(total>0)?dcf.format(total):0} </h3> <a class="mx-3 btn btn-primary" href="cart-check-out">Check Out</a></div>
+		<div class="d-flex py-3"><h3>Total Price:$ ${(total>0)?dcf.format(total):0} </h3> <a class="mx-3 btn btn-primary" href="cart-check-out">Check Out</a></div>
 		<table class="table table-light">
 			<thead>
 				<tr>

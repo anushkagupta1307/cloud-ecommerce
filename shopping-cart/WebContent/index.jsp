@@ -2,10 +2,10 @@
 <%@page import="ecomm.model.Product"%>
 <%@page import="java.util.List"%>
 <%@page import="ecomm.dao.ProductDao"%>
-<%@page import="ecomm.model.User"%>
+<%@page import="ecomm.model.*"%>
 <%@page import="ecomm.connection.DBConnection"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
     
     <%
 User auth = (User) request.getSession().getAttribute("auth");
@@ -14,6 +14,10 @@ if (auth != null) {
 }
 ProductDao pd = new ProductDao(DBConnection.getConnection());
 List<Product> products = pd.getAllProducts();
+ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
+if (cart_list != null) {
+	request.setAttribute("cart_list", cart_list);
+}
 %>
 <!DOCTYPE html>
 <html>
