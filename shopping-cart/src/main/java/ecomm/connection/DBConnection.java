@@ -9,7 +9,7 @@ public class DBConnection {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException{
         if(connection == null){
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/cloud_ecomm","root","mysql_password");
+            connection=DriverManager.getConnection("jdbc:mysql://database-2.charl9rzdvoc.ap-northeast-1.rds.amazonaws.com:3306/cloud_ecomm","admin","CLOUD1234#");
             System.out.print("connected");
         }
         return connection;
